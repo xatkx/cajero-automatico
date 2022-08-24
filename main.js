@@ -46,65 +46,60 @@ function cajero (pide){
     })
     let personaCliente = [];
 
-    if(pide <= 1000){
-        if(!(pide > dineroTotal)){
-            if(!(pide < 10)){
+    if(!(pide <= 1000)){
 
-
-                for (let i = 0; i < banco.length ; i++) {
-    
-                    if(banco[i].cantidad > 0){
-                        
-
-                        darCantidad = Math.floor(pide / banco[i].dollar.valor)
-
-                        if(banco[i].cantidad <= darCantidad){
-
-                            darCantidad = darCantidad - banco[i].cantidad;
-
-                            console.log('cantidad: ',darCantidad)
-
-                            for (let dar = 0; dar < banco[i].cantidad; dar++) {
-                                personaCliente.push(dollar[i])
-                                pide = pide - dollar[i].valor
-                            }
-
-                            banco[i].cantidad = banco[i].cantidad - banco[i].cantidad
-
-
-                            // pide = pide + (darCantidad * banco[i].dollar.valor)
-
-
-                        }
-                        else if(darCantidad > 0){
-
-                        for (let dar = 0; dar < darCantidad; dar++) {
-                            personaCliente.push(dollar[i])
-                            console.log('maldito dolar ',darCantidad)
-                        }
-
-
-                        pide = pide - (darCantidad * banco[i].dollar.valor)
-                        banco[i].cantidad = banco[i].cantidad - darCantidad;
-                    } 
-                    
-                }
-                
-                if(i + 1 == banco.length){
-                    
-                    console.log('banco: ',banco)
-
-                        return personaCliente
-                    }
-                }
-            } else {
-                console.log('minimo 10 dollar')
-            }
-        } else {
-            console.log('no tenemos esa cantidad de dollar')
-        }
-    } else{
         console.log('maximo es 1000 dollar')
+    } 
+    else if(pide > dineroTotal){
+
+        console.log('no tenemos esa cantidad de dollar')
+
+    } else if(pide < 10){
+
+        console.log('minimo 10 dollar')
+    } 
+    else {
+
+        for (let i = 0; i < banco.length ; i++) {
+
+            if(banco[i].cantidad > 0){
+                
+
+                darCantidad = Math.floor(pide / banco[i].dollar.valor)
+
+                if(banco[i].cantidad <= darCantidad){
+
+                    darCantidad = darCantidad - banco[i].cantidad;
+
+                    for (let dar = 0; dar < banco[i].cantidad; dar++) {
+                        personaCliente.push(dollar[i])
+                        pide = pide - dollar[i].valor
+                    }
+
+                    banco[i].cantidad = banco[i].cantidad - banco[i].cantidad
+                    // pide = pide + (darCantidad * banco[i].dollar.valor)
+                }
+                else if(darCantidad > 0){
+
+                for (let dar = 0; dar < darCantidad; dar++) {
+                    personaCliente.push(dollar[i])
+                    console.log('maldito dolar ',darCantidad)
+                }
+
+
+                pide = pide - (darCantidad * banco[i].dollar.valor)
+                banco[i].cantidad = banco[i].cantidad - darCantidad;
+                }
+            
+            }
+        
+        if(i + 1 == banco.length){
+            
+            console.log('banco: ',banco)
+
+                return personaCliente
+            }
+        }
     }
 }
 /*
