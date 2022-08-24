@@ -32,12 +32,12 @@ dollar.push({valor: 1, name: 10});
 
 function cajero (pide){
     let darCantidad = 0;
-    let banco = [
-        {dollar: dollar[0] , cantidad: 394},
-        {dollar: dollar[1], cantidad: 299},
-        {dollar: dollar[2] , cantidad: 232},
-        {dollar: dollar[3] , cantidad: 232},
-        {dollar: dollar[4] , cantidad: 232}
+    var banco = [
+        {dollar: dollar[0] , cantidad: 0},
+        {dollar: dollar[1], cantidad: 22},
+        {dollar: dollar[2] , cantidad: 22},
+        {dollar: dollar[3] , cantidad: 22},
+        {dollar: dollar[4] , cantidad: 22}
 
     ]
     var dineroTotal = 0
@@ -49,17 +49,34 @@ function cajero (pide){
     if(pide <= 1000){
         if(!(pide > dineroTotal)){
             if(!(pide < 10)){
+
+
                 for (let i = 0; i < banco.length ; i++) {
     
-                    darCantidad = Math.floor(pide / banco[i].dollar.valor)
-                    if(darCantidad > 0){
+                    if(banco[i].cantidad > 0){
+
+                        console.log('cantidad',banco[i].cantidad)
+
+                        darCantidad = Math.floor(pide / banco[i].dollar.valor)
+                        if(darCantidad > banco[i].cantidad){
+                            darCantidad - darCantidad - banco[i].cantidad
+                        }
+                    if(darCantidad > 0 ){
+
                         for (let dar = 0; dar < darCantidad; dar++) {
                             personaCliente.push(dollar[i])
+                            console.log('banco',banco)
                         }
                     }
+                    
+                    banco[i].cantidad = banco[i].cantidad - darCantidad;
                     pide = pide - (darCantidad * banco[i].dollar.valor)
+                    
+                }
     
                     if(i + 1 == banco.length){
+
+
                         return personaCliente
                     }
                 }
@@ -73,7 +90,6 @@ function cajero (pide){
         console.log('maximo es 1000 dollar')
     }
 }
-cajero(180)
 /*
 
 for (let i = 0; i < banco.length ; i++) {
