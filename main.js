@@ -31,13 +31,13 @@ dollar.push({valor: 1, name: 10});
 // console.log('cliente',cliente)
 
 function cajero (pide){
-    let darCantidad = 0;
+    var darCantidad = 0;
     var banco = [
-        {dollar: dollar[0] , cantidad: 0},
-        {dollar: dollar[1], cantidad: 22},
-        {dollar: dollar[2] , cantidad: 22},
-        {dollar: dollar[3] , cantidad: 22},
-        {dollar: dollar[4] , cantidad: 22}
+        {dollar: dollar[0] , cantidad: 2},
+        {dollar: dollar[1], cantidad: 2},
+        {dollar: dollar[2] , cantidad: 12},
+        {dollar: dollar[3] , cantidad: 2},
+        {dollar: dollar[4] , cantidad: 12}
 
     ]
     var dineroTotal = 0
@@ -54,28 +54,45 @@ function cajero (pide){
                 for (let i = 0; i < banco.length ; i++) {
     
                     if(banco[i].cantidad > 0){
-
-                        console.log('cantidad',banco[i].cantidad)
+                        
 
                         darCantidad = Math.floor(pide / banco[i].dollar.valor)
-                        if(darCantidad > banco[i].cantidad){
-                            darCantidad - darCantidad - banco[i].cantidad
+
+                        if(banco[i].cantidad <= darCantidad){
+
+                            darCantidad = darCantidad - banco[i].cantidad;
+
+                            console.log('cantidad: ',darCantidad)
+
+                            for (let dar = 0; dar < banco[i].cantidad; dar++) {
+                                personaCliente.push(dollar[i])
+                                pide = pide - dollar[i].valor
+                            }
+
+                            banco[i].cantidad = banco[i].cantidad - banco[i].cantidad
+
+
+                            // pide = pide + (darCantidad * banco[i].dollar.valor)
+
+
                         }
-                    if(darCantidad > 0 ){
+                        else if(darCantidad > 0){
 
                         for (let dar = 0; dar < darCantidad; dar++) {
                             personaCliente.push(dollar[i])
-                            console.log('banco',banco)
+                            console.log('maldito dolar ',darCantidad)
                         }
-                    }
-                    
-                    banco[i].cantidad = banco[i].cantidad - darCantidad;
-                    pide = pide - (darCantidad * banco[i].dollar.valor)
+
+
+                        pide = pide - (darCantidad * banco[i].dollar.valor)
+                        banco[i].cantidad = banco[i].cantidad - darCantidad;
+                    } 
                     
                 }
-    
-                    if(i + 1 == banco.length){
-
+                
+                if(i + 1 == banco.length){
+                    
+                    console.log('banco: ',banco)
 
                         return personaCliente
                     }
